@@ -103,9 +103,9 @@ PROMPT_AT=@
 
 __ps1() {
   local P='$' dir="${PWD##*/}" B countme short long double\
-    r='\[\e[31m\]' g='\[\e[35m\]' h='\[\e[36m\]' \
-    u='\[\e[31m\]' p='\[\e[31m\]' w='\[\e[31m\]' \
-    b='\[\e[36m\]' x='\[\e[0m\]'
+    r='\[\e[32m\]' g='\[\e[34m\]' h='\[\e[33m\]' \
+    u='\[\e[32m\]' p='\[\e[32m\]' w='\[\e[32m\]' \
+    b='\[\e[33m\]' x='\[\e[0m\]'
 
   [[ $EUID == 0 ]] && P='#' && u=$r && p=$u # root
   [[ $PWD = / ]] && dir=/
@@ -171,6 +171,8 @@ alias c='clear'
 
 _have lynx && alias lynx='lynx -cfg=~/.config/lynx/lynx.cfg'
 _have podman && alias docker=podman
+
+_have epic5 && alias irc='epic5'
 
 _have vim && alias vi=vim && EDITOR=vim
 _have nvim && alias vi=nvim && EDITOR=nvim

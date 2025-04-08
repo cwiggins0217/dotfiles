@@ -115,6 +115,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'conradirwin/vim-bracketed-paste'
   Plug 'habamax/vim-asciidoctor'
   Plug 'mjakl/vim-asciidoc'
+  Plug 'NLKNguyen/papercolor-theme'
   if has('nvim-0.8')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -162,7 +163,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   syntax on
   set background=dark
-  colorscheme elflord 
+  colorscheme PaperColor 
 
   hi Normal ctermbg=NONE guibg=NONE
   hi LineNr ctermbg=NONE guibg=NONE
