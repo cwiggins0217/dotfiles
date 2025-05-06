@@ -15,6 +15,7 @@ _source_if() { [[ -r "$1" ]] && source "$1"; }
 # better compatibility and portability
 # env vars
 export PATH=$PATH:/sbin/:/usr/sbin:~/go/bin/:~/.local/bin/:/opt/nvim-linux64/bin:/usr/local/go/bin:~/Scripts:/usr/local/plan9
+export XDG_RUNTIME_DIR=~/.local/share/ # for sway. there is probably a better way to do this.
 export EDITOR=vim
 export GITUSER="$USER"
 export REPOS="$HOME/Repos"
@@ -47,7 +48,7 @@ export GOPROXY=direct
 export CGO_ENABLED=0
 export PYTHONDONTWRITEBYTECODE=2
 export LC_COLLATE=C
-export CFLAGS="-Wall -Wextra -Werror -O0 -g -fsanitize=address -fno-omit-frame-pointer -finstrument-functions"
+export CFLAGS="-Wall -Wextra -Werror -O2 -g -fsanitize=address -fno-omit-frame-pointer -finstrument-functions"
 
 export LESS_TERMCAP_mb="[35m" # magenta
 export LESS_TERMCAP_md="[33m" # yellow
@@ -159,6 +160,7 @@ _have btop && alias top=btop
 alias iam=live
 alias fetch=fastfetch
 alias neofetch=fastfetch
+alias neo='neo -D'
 alias suod=sudo
 alias sduo=sudo
 alias glance=glances
@@ -169,10 +171,12 @@ alias ewez='vi $HOME/.wezterm.lua'
 alias ebash='vi $HOME/.bashrc'
 alias c='clear'
 
+_have doas && alias sudo=doas
+
 _have lynx && alias lynx='lynx -cfg=~/.config/lynx/lynx.cfg'
 _have podman && alias docker=podman
 
-_have epic5 && alias irc='epic5'
+_have weechat && alias irc='weechat'
 
 _have vim && alias vi=vim && EDITOR=vim
 _have nvim && alias vi=nvim && EDITOR=nvim

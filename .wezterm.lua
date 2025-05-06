@@ -2,10 +2,10 @@ local wezterm = require("wezterm")
 local config = {}
 
 if wezterm.config_builder then config = wezterm.config_builder() end
-config.color_scheme = "Papercolor Dark (Gogh)"
+config.color_scheme = "Gruvbox Material (Gogh)"
 config.font = wezterm.font_with_fallback({
-  { family = "OverpassM Nerd Font Mono", scale = 1.50 },
-  { family = "Font Awesome 6 Free", scale = 1.50 },
+  { family = "Ubuntu Mono Nerd Font", scale = 1.50 },
+  { family = "Font Awesome 6 Free", scale = 1.33 },
 })
 
 config.window_padding = {
@@ -15,18 +15,9 @@ config.window_padding = {
   bottom = 0,
 }
 
--- toggle fullscreen
-config.keys = {
-  {
-    key = 'f',
-    mods = 'SHIFT|CTRL',
-    action = wezterm.action.ToggleFullScreen,
-  },
-}
-
 config.default_prog = { 'bash', '-c', 'tmux -q has-session && exec tmux attach-session || tmux new-session -n $USER -s$USER@$HOSTNAME' }
 
-config.window_background_opacity = 1.0
+config.window_background_opacity = 0.70
 config.enable_wayland = true
 config.window_decorations = "RESIZE | TITLE"
 config.window_close_confirmation = "AlwaysPrompt"

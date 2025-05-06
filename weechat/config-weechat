@@ -6,7 +6,7 @@ EOM
 
 tokenurl=https://antiscuff.com/oauth
 
-#[ ! -d "$HOME/.weechat" ] && mkdir -p ~/.weechat
+[ ! -d "$HOME/.weechat" ] && mkdir -p ~/.weechat
 
 fifo=~/.weechat/fifo
 log=~/.weechat/log

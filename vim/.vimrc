@@ -107,15 +107,10 @@ set laststatus=2
 if filereadable(expand("~/.vim/autoload/plug.vim"))
 
   call plug#begin('~/.local/share/vim/plugins')
-  Plug 'rwxrob/vim-pandoc-syntax-simple'
   Plug 'fatih/vim-go'
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
-  Plug 'ap/vim-css-color'
   Plug 'conradirwin/vim-bracketed-paste'
-  Plug 'habamax/vim-asciidoctor'
-  Plug 'mjakl/vim-asciidoc'
-  Plug 'NLKNguyen/papercolor-theme'
   if has('nvim-0.8')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -123,8 +118,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   if has ('nvim')
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-lua-ftplugin'
-  else 
-    Plug 'dahu/vim-asciidoc'
   endif
   call plug#end()
 
@@ -163,7 +156,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   syntax on
   set background=dark
-  colorscheme PaperColor 
+  colorscheme retrobox 
 
   hi Normal ctermbg=NONE guibg=NONE
   hi LineNr ctermbg=NONE guibg=NONE

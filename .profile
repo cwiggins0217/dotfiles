@@ -3,3 +3,5 @@ if [ -n "$BASH_VERSION" ]; then
     . "$HOME/.bashrc"
   fi
 fi
+
+[ -f "$HOME/.kshrc" ] && . "$HOME/.kshrc"
