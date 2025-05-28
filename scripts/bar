@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+date=$(date "+%Y/%m/%d")
+time=$(date "+%H:%M")
+
+audio_volume=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
+audio_is_muted=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+
+# Network
+network=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
+ping=$(ping -c 1 www.google.es | tail -1| awk '{print $4}' | cut -d '/' -f 2 | cut -d '.' -f 1)
+
+if ! [ $network ]
+then
+   network_active="⛔"
+else
+   network_active="⇆"
+fi
+
+if [ $audio_is_muted = "yes" ]
+then
+    audio_active='🔇'
+else
+    audio_active='🔊'
+fi
+
+echo "$network_active $network ($ping ms) | $audio_active $audio_volume | $date 🕘 $time "

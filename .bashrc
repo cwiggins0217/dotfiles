@@ -14,8 +14,8 @@ _source_if() { [[ -r "$1" ]] && source "$1"; }
 
 # better compatibility and portability
 # env vars
-export PATH=$PATH:/sbin/:/usr/sbin:~/go/bin/:~/.local/bin/:/opt/nvim-linux64/bin:/usr/local/go/bin:~/Scripts:/usr/local/plan9
-export XDG_RUNTIME_DIR=~/.local/share/ # for sway. there is probably a better way to do this.
+export PATH=$PATH:/sbin/:/usr/sbin:~/go/bin/:~/.local/bin/:/opt/nvim-linux64/bin:/usr/local/go/bin:~/Scripts:~/.cache/rebar3/bin/:~/.cargo/bin/
+export XDG_RUNTIME_DIR=/run/user/`id -u` # for sway. there is probably a better way to do this.
 export EDITOR=vim
 export GITUSER="$USER"
 export REPOS="$HOME/Repos"
@@ -60,7 +60,7 @@ export LESS_TERMCAP_us="[4m"  # underline
 
 # IRC vars
 # investigate this later
-#export IRCNICK="TGG"
+#export IRCNICK="cwiggins"
 #export IRCSERVER="irc.libera.chat"
 
 # clear screen
@@ -104,8 +104,8 @@ PROMPT_AT=@
 
 __ps1() {
   local P='$' dir="${PWD##*/}" B countme short long double\
-    r='\[\e[32m\]' g='\[\e[34m\]' h='\[\e[33m\]' \
-    u='\[\e[32m\]' p='\[\e[32m\]' w='\[\e[32m\]' \
+    r='\[\e[32m\]' g='\[\e[35m\]' h='\[\e[33m\]' \
+    u='\[\e[32m\]' p='\[\e[36m\]' w='\[\e[35m\]' \
     b='\[\e[33m\]' x='\[\e[0m\]'
 
   [[ $EUID == 0 ]] && P='#' && u=$r && p=$u # root
@@ -170,6 +170,7 @@ alias evi='vi $HOME/.vimrc'
 alias ewez='vi $HOME/.wezterm.lua'
 alias ebash='vi $HOME/.bashrc'
 alias c='clear'
+alias rebar='rebar3'
 
 _have doas && alias sudo=doas
 
