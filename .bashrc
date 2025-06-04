@@ -32,7 +32,7 @@ export PUBLIC="$HOME/Public"
 export PRIVATE="$HOME/Private"
 export PICTURES="$HOME/Pictures"
 export MUSIC="$HOME/Music"
-export VIDEOS="$HOME/Videos"
+#export VIDEOS="$HOME/Videos"
 export PDFS="$HOME/usb/pdfs"
 export VIRTUALMACHINES="$HOME/VirtualMachines"
 export WORKSPACES="$HOME/Workspaces" # container home dirs for mounting
@@ -93,46 +93,37 @@ export HISTFILESIZE=10000
 
 shopt -s histappend
 
-# --------------------------- smart prompt ---------------------------
-#                 (keeping in bashrc for portability)
-#                 totally didn't steal this from rob muhlstein
-#                 https://rwxrob.github.io/
+# --------------------------- alchemical prompt ---------------------------
+RESET="\[\e[0m\]"
+BLACK="\[\e[30m\]"
+RED="\[\e[31m\]"
+GREEN="\[\e[32m\]"
+YELLOW="\[\e[33m\]"
+BLUE="\[\e[34m\]"
+MAGENTA="\[\e[35m\]"
+CYAN="\[\e[36m\]"
+WHITE="\[\e[37m\]"
+BOLD="\[\e[1m\]"
 
-PROMPT_LONG=20
-PROMPT_MAX=95
-PROMPT_AT=@
+if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+  source /usr/share/git-core/contrib/completion/git-prompt.sh
+elif [ -f /etc/bash_completion.d/git-prompt ]; then
+  source /etc/bash_completion.d/git-prompt
+fi
 
-__ps1() {
-  local P='$' dir="${PWD##*/}" B countme short long double\
-    r='\[\e[32m\]' g='\[\e[35m\]' h='\[\e[33m\]' \
-    u='\[\e[32m\]' p='\[\e[36m\]' w='\[\e[35m\]' \
-    b='\[\e[33m\]' x='\[\e[0m\]'
+export GIT_PS1_SHOWDIRTYSTATE=1     # * = unstaged, + = staged
+export GIT_PS1_SHOWUNTRACKEDFILES=1 # % = untracked
+export GIT_PS1_SHOWSTASHSTATE=1     # $ = stashed
 
-  [[ $EUID == 0 ]] && P='#' && u=$r && p=$u # root
-  [[ $PWD = / ]] && dir=/
-  [[ $PWD = "$HOME" ]] && dir='~'
-
-  B=$(git branch --show-current 2>/dev/null)
-  [[ $dir = "$B" ]] && B=.
-  countme="$USER$PROMPT_AT$(hostname):$dir($B)\$ "
-
-  [[ $B = master || $B = main ]] && b="$r"
-  [[ -n "$B" ]] && B="$g($b$B$g)"
-
-  short="$u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
-  long="$g╔ $u\u$g$PROMPT_AT$h\h$g:$w$dir$B\n$g╚ $p$P$x "
-  double="$g╔ $u\u$g$PROMPT_AT$h\h$g:$w$dir\n$g║ $B\n$g╚ $p$P$x "
-
-  if (( ${#countme} > PROMPT_MAX )); then
-    PS1="$double"
-  elif (( ${#countme} > PROMPT_LONG )); then
-    PS1="$long"
-  else
-    PS1="$short"
-  fi
+    # Symbolic Git Status
+function hermetic_git_status() {
+  local git_branch=$(__git_ps1 "%s")
+    if [ -n "$git_branch" ]; then
+      echo -n "${BLUE}☿ ${YELLOW}($git_branch)${RED}$(__git_ps1 '' ' ⚗')"
+    fi
 }
 
-PROMPT_COMMAND="__ps1"
+export PS1="\n${BOLD}${MAGENTA}🜁 ${CYAN}\u${WHITE}@${GREEN}\h ${YELLOW}in ${BLUE}\w \$(hermetic_git_status)\n${RED}⚗ ${WHITE}\$ ${RESET}"
 
 # aliases
 unalias -a
@@ -155,11 +146,11 @@ alias view='vi -R' # which is usually linked to vim
 alias clear='printf "\e[H\e[2J"'
 alias c='printf "\e[H\e[2J"'
 alias coin="clip '(yes|no)'"
-#alias grep="pcregrep"
+alias grep="pcregrep"
 _have btop && alias top=btop
 alias iam=live
-alias fetch=fastfetch
-alias neofetch=fastfetch
+_have fastfetch && alias fetch=fastfetch
+_have fastfetch && alias neofetch=fastfetch
 alias neo='neo -D'
 alias suod=sudo
 alias sduo=sudo
@@ -169,8 +160,6 @@ alias price='curl rate.sx/btc'
 alias evi='vi $HOME/.vimrc'
 alias ewez='vi $HOME/.wezterm.lua'
 alias ebash='vi $HOME/.bashrc'
-alias c='clear'
-alias rebar='rebar3'
 
 _have doas && alias sudo=doas
 
