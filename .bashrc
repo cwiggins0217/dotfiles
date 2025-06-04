@@ -117,10 +117,25 @@ export GIT_PS1_SHOWSTASHSTATE=1     # $ = stashed
 
     # Symbolic Git Status
 function hermetic_git_status() {
-  local git_branch=$(__git_ps1 "%s")
-    if [ -n "$git_branch" ]; then
-      echo -n "${BLUE}☿ ${YELLOW}($git_branch)${RED}$(__git_ps1 '' ' ⚗')"
-    fi
+   # Only show status inside a Git repo
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    local branch dirty staged untracked stashed symbols=""
+
+    # Get the current branch name
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
+
+    # Check for repo status
+    dirty=$(git diff --quiet || echo "⚗")              # unstaged changes
+    staged=$(git diff --cached --quiet || echo "🜍")     # staged changes
+    untracked=$(git ls-files --others --exclude-standard | grep -q . && echo "🜃")  # untracked files
+    stashed=$(git stash list | grep -q . && echo "🜄")   # stashed changes
+
+    # Combine symbols
+    symbols="$staged$dirty$untracked$stashed"
+
+    # Output with Mercury glyph and optional status
+    echo -n "☿ ($branch${symbols:+ $symbols})"
+  fi
 }
 
 export PS1="\n${BOLD}${MAGENTA}🜁 ${CYAN}\u${WHITE}@${GREEN}\h ${YELLOW}in ${BLUE}\w \$(hermetic_git_status)\n${RED}⚗ ${WHITE}\$ ${RESET}"
