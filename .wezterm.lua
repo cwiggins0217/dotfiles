@@ -3,9 +3,9 @@ local config = {}
 
 if wezterm.config_builder then config = wezterm.config_builder() end
 config.font = wezterm.font_with_fallback({
-  { family = "0xProto Nerd Font", scale = 1.33 },
-  { family = "JoyPixels", scale = 1.33 },
-  { family = "Font Awesome 6 Free", scale = 1.33 },
+  { family = "0xProto Nerd Font", scale = 1.25 },
+--{ family = "JoyPixels", scale = 1.33 },
+--  { family = "Font Awesome 6 Free", scale = 1.33 },
 })
 
 -- Color scheme name
@@ -23,42 +23,25 @@ config.color_schemes = {
     selection_bg = "#888888", -- Salt
 
     ansi = {
-  "#1c1c1c", -- black (nigredo)
-  "#a34a35", -- red (rubedo)
-  "#789262", -- green (green lion)
-  "#e5c07b", -- yellow (citrinitas)
-  "#5ab0d6", -- blue (mercury)
-  "#9370db", -- magenta (aether)
-  "#999688", -- cyan (salt)
-  "#e8e6dc", -- white (albedo)
-  }
+      "#1c1c1c", -- black (nigredo)
+      "#a34a35", -- red (rubedo)
+      "#789262", -- green (green lion)
+      "#e5c07b", -- yellow (citrinitas)
+      "#5ab0d6", -- blue (mercury)
+      "#9370db", -- magenta (aether)
+      "#999688", -- cyan (salt)
+      "#e8e6dc", -- white (albedo)
+    },
 
-  brights = {
-  "#2e2e2e", -- bright black
-  "#c06b54", -- bright red (sulphur)
-  "#92b06f", -- bright green (vegetation)
-  "#f8d57d", -- bright yellow (illumination)
-  "#74c6eb", -- bright blue (refined mercury)
-  "#b29ae3", -- bright magenta (crowned spirit)
-  "#bcb5a5", -- bright cyan (refined salt)
-  "#f6f1e7", -- bright white (transcendent albedo)
-  }
-
-    tab_bar = {
-      background = "#1c1c1c",
-      active_tab = {
-        bg_color = "#888888",
-        fg_color = "#1c1c1c",
-      },
-      inactive_tab = {
-        bg_color = "#2c2c2c",
-        fg_color = "#888888",
-      },
-      inactive_tab_hover = {
-        bg_color = "#3c3c3c",
-        fg_color = "#cccccc",
-        italic = true,
-      },
+    brights = {
+      "#2e2e2e", -- bright black
+      "#c06b54", -- bright red (sulphur)
+      "#92b06f", -- bright green (vegetation)
+      "#f8d57d", -- bright yellow (illumination)
+      "#74c6eb", -- bright blue (refined mercury)
+      "#b29ae3", -- bright magenta (crowned spirit)
+      "#bcb5a5", -- bright cyan (refined salt)
+      "#f6f1e7", -- bright white (transcendent albedo)
     },
   },
 }

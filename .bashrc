@@ -138,7 +138,7 @@ function hermetic_git_status() {
   fi
 }
 
-export PS1="\n${BOLD}${MAGENTA}🜁 ${CYAN}\u${WHITE}@${GREEN}\h ${YELLOW}in ${BLUE}\w \$(hermetic_git_status)\n${RED}⚗ ${WHITE}\$ ${RESET}"
+export PS1="\n${BOLD}${MAGENTA}🜁 ${CYAN}\u${WHITE}@${MAGENTA}\h ${WHITE}in ${BLUE}\w \$(hermetic_git_status)\n${RED}⚗ ${WHITE}\$ ${RESET}"
 
 # aliases
 unalias -a
