@@ -13,9 +13,9 @@ set number
 set relativenumber
 set ruler
 set showmode
-set tabstop=2
+set tabstop=8
 set t_vb=""
-set softtabstop=2
+set softtabstop=8
 set shiftwidth=2
 set smartindent
 set smarttab

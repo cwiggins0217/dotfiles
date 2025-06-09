@@ -49,7 +49,7 @@ config.color_schemes = {
 config.window_padding = {
   left = 20,
   right = 0,
-  top = 20,
+  top = 05,
   bottom = 0,
 }
 
