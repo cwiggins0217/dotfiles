@@ -111,12 +111,12 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
   Plug 'conradirwin/vim-bracketed-paste'
+  Plug 'jnurmine/zenburn'
   if has('nvim-0.8')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
   endif
   if has ('nvim')
-    Plug 'martinsione/darkplus.nvim'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-lua-ftplugin'
   endif
@@ -157,7 +157,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   syntax on
   set background=dark
-  colorscheme hermetic-alchemy 
+  colorscheme retrobox
 
   hi Normal ctermbg=NONE guibg=NONE
   hi LineNr ctermbg=NONE guibg=NONE

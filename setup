@@ -8,6 +8,7 @@ ln -sf "$PWD/.inputrc" "$HOME/.inputrc"
 ln -sf "$PWD/.profile" "$HOME/.profile"
 ln -sf "$PWD/.profile" "$HOME/.bash_profile"
 ln -sf "$PWD/scripts" "$HOME/Scripts"
+ln -sf "$PWD/emacs" "$HOME/.emacs.d"
 
 for i in vim lynx gh git tmux docker podman iam; do
 	cd $i && ./setup

@@ -138,7 +138,7 @@ function hermetic_git_status() {
   fi
 }
 
-export PS1="\n${BOLD}${MAGENTA}🜁 ${CYAN}\u${WHITE}@${MAGENTA}\h ${WHITE}in ${BLUE}\w \$(hermetic_git_status)\n${RED}⚗ ${WHITE}\$ ${RESET}"
+export PS1="${BOLD}${RED}🜁 ${GREEN}\u${WHITE}@${YELLOW}\h ${WHITE}in ${BLUE}\w \$(hermetic_git_status)\n${RED}⚗ ${WHITE}\$ ${RESET}"
 
 # aliases
 unalias -a
@@ -187,7 +187,7 @@ _have vim && alias vi=vim && EDITOR=vim
 _have nvim && alias vi=nvim && EDITOR=nvim
 _have gcal && alias cal=gcal
 
-set -o vi
+#set -o vi
 
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -196,3 +196,5 @@ PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 PATH="$HOME/.raku/bin${PATH:+:${PATH}}"; export PATH;
+
+. "$HOME/.local/bin/env"
