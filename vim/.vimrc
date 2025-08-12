@@ -111,7 +111,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
   Plug 'conradirwin/vim-bracketed-paste'
-  Plug 'jnurmine/zenburn'
   if has('nvim-0.8')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -119,6 +118,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   if has ('nvim')
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-lua-ftplugin'
+    Plug 'folke/tokyonight.nvim'
+    Plug 'craftzdog/solarized-osaka.nvim'
   endif
   call plug#end()
 
@@ -157,7 +158,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   syntax on
   set background=dark
-  colorscheme retrobox
+  colorscheme solarized-osaka
 
   hi Normal ctermbg=NONE guibg=NONE
   hi LineNr ctermbg=NONE guibg=NONE
