@@ -8,3 +8,4 @@ fi
 
 # opam configuration
 test -r /home/cwiggins/.opam/opam-init/init.sh && . /home/cwiggins/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+. "$HOME/.cargo/env"

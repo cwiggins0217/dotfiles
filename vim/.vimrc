@@ -118,8 +118,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   if has ('nvim')
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-lua-ftplugin'
-    Plug 'folke/tokyonight.nvim'
-    Plug 'craftzdog/solarized-osaka.nvim'
   endif
   call plug#end()
 
@@ -158,7 +156,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   syntax on
   set background=dark
-  colorscheme solarized-osaka
+  colorscheme habamax 
 
   hi Normal ctermbg=NONE guibg=NONE
   hi LineNr ctermbg=NONE guibg=NONE
