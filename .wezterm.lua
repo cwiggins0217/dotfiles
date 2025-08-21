@@ -2,9 +2,9 @@ local wezterm = require("wezterm")
 local config = {}
 
 if wezterm.config_builder then config = wezterm.config_builder() end
-config.color_scheme = 'Hacktober'
+config.color_scheme = 'BlulocoLight'
 config.font = wezterm.font_with_fallback({
-  { family = "0xProto Nerd Font Propo", scale = 1.25 },
+  { family = "0xProto Nerd Font", scale = 1.33 },
   { family = "JoyPixels", scale = 1.33 },
   { family = "Font Awesome 6 Free", scale = 1.33 },
 })
@@ -17,7 +17,7 @@ config.window_padding = {
 }
 
 --config.default_prog = { 'bash', '-c', 'tmux -q has-session && exec tmux attach-session || tmux new-session -n $USER -s$USER@$HOSTNAME' }
-config.window_background_opacity = 0.90
+config.window_background_opacity = 1.00
 config.enable_wayland = false
 config.window_decorations = "RESIZE | TITLE"
 config.window_close_confirmation = "AlwaysPrompt"
