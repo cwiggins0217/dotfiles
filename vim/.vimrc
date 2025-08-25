@@ -117,8 +117,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   if has ('nvim')
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-lua-ftplugin'
-    Plug 'rktjmp/lush.nvim'
-    Plug 'uloco/bluloco.nvim'
   endif
   call plug#end()
 
@@ -156,8 +154,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>m ilog.Print("made")<CR><ESC>
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   syntax on
-  set background=light
-  colorscheme bluloco
+  set background=dark
+  colorscheme slate 
 
   hi Normal ctermbg=NONE guibg=NONE
   hi LineNr ctermbg=NONE guibg=NONE
