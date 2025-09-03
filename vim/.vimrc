@@ -111,8 +111,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
   Plug 'conradirwin/vim-bracketed-paste'
-  Plug 'sainnhe/sonokai'
-  Plug 'srcery-colors/srcery-vim'
   if has('nvim-0.8')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   endif
