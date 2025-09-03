@@ -11,12 +11,10 @@ config.font = wezterm.font_with_fallback({
 
 config.window_padding = {
   left = 5,
-  right = 0,
   top = 5,
-  bottom = 0,
 }
 
---config.default_prog = { 'bash', '-c', 'tmux -q has-session && exec tmux attach-session || tmux new-session -n $USER -s$USER@$HOSTNAME' }
+config.default_prog = { 'bash', '-c', 'tmux -q has-session && exec tmux attach-session || tmux new-session -n $USER -s$USER@$HOSTNAME' }
 config.window_background_opacity = 1.00
 config.enable_wayland = false
 config.window_decorations = "RESIZE | TITLE"
