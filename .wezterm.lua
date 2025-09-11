@@ -4,9 +4,9 @@ local config = {}
 if wezterm.config_builder then config = wezterm.config_builder() end
 config.color_scheme = 'Builtin Solarized Dark'
 config.font = wezterm.font_with_fallback({
-  { family = "0xProto Nerd Font", scale = 1.33 },
-  { family = "JoyPixels", scale = 1.33 },
-  { family = "Font Awesome 6 Free", scale = 1.33 },
+  { family = "0xProto Nerd Font", scale = 1.25 },
+  { family = "JoyPixels", scale = 1.25 },
+  { family = "Font Awesome 6 Free", scale = 1.25 },
 })
 
 config.window_padding = {

@@ -93,52 +93,85 @@ export HISTFILESIZE=10000
 
 shopt -s histappend
 
-# --------------------------- alchemical prompt ---------------------------
-RESET="\[\e[0m\]"
-BLACK="\[\e[30m\]"
-RED="\[\e[31m\]"
-GREEN="\[\e[32m\]"
-YELLOW="\[\e[33m\]"
-BLUE="\[\e[34m\]"
-MAGENTA="\[\e[35m\]"
-CYAN="\[\e[36m\]"
-WHITE="\[\e[37m\]"
-BOLD="\[\e[1m\]"
+
 
 if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
   source /usr/share/git-core/contrib/completion/git-prompt.sh
 elif [ -f /etc/bash_completion.d/git-prompt ]; then
   source /etc/bash_completion.d/git-prompt
 fi
+ # ------- BASH PROMPT--------
+ # stole from from rob muhlstein 
+ # https://github.com/rwxrob/dot
 
-export GIT_PS1_SHOWDIRTYSTATE=1     # * = unstaged, + = staged
-export GIT_PS1_SHOWUNTRACKEDFILES=1 # % = untracked
-export GIT_PS1_SHOWSTASHSTATE=1     # $ = stashed
+PROMPT_LONG=20
+PROMPT_MAX=95
+PROMPT_AT=@
 
-    # Symbolic Git Status
-function hermetic_git_status() {
-   # Only show status inside a Git repo
-  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    local branch dirty staged untracked stashed symbols=""
+__ps1() {
+	local P='$' dir="${PWD##*/}" B countme short long double \
+		r='\[\e[31m\]' h='\[\e[34m\]' \
+		u='\[\e[33m\]' p='\[\e[34m\]' w='\[\e[35m\]' \
+		b='\[\e[36m\]' x='\[\e[0m\]' \
+		g="\[\033[38;2;90;82;76m\]"
 
-    # Get the current branch name
-    branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null)
+	[[ $EUID == 0 ]] && P='#' && u=$r && p=$u # root
+	[[ $PWD = / ]] && dir=/
+	[[ $PWD = "$HOME" ]] && dir='~'
 
-    # Check for repo status
-    dirty=$(git diff --quiet || echo "⚗")              # unstaged changes
-    staged=$(git diff --cached --quiet || echo "🜍")     # staged changes
-    untracked=$(git ls-files --others --exclude-standard | grep -q . && echo "🜃")  # untracked files
-    stashed=$(git stash list | grep -q . && echo "🜄")   # stashed changes
+	B=$(git branch --show-current 2>/dev/null)
+	[[ $dir = "$B" ]] && B=.
+	countme="$USER$PROMPT_AT$(hostname):$dir($B)\$ "
 
-    # Combine symbols
-    symbols="$staged$dirty$untracked$stashed"
+	[[ $B == master || $B == main ]] && b="$r"
+	[[ -n "$B" ]] && B="$g($b$B$g)"
 
-    # Output with Mercury glyph and optional status
-    echo -n "☿ ($branch${symbols:+ $symbols})"
-  fi
+	short="$u\u$g$PROMPT_AT$h\h$g:$w$dir$B$p$P$x "
+	long="${g}╔$u\u$g$PROMPT_AT$h\h$g:$w$dir$B\n${g}╚$p$P$x "
+	double="${g}╔$u\u$g$PROMPT_AT$h\h$g:$w$dir\n${g}║$B\n${g}╚$p$P$x "
+
+	if ((${#countme} > PROMPT_MAX)); then
+		PS1="$double"
+	elif ((${#countme} > PROMPT_LONG)); then
+		PS1="$long"
+	else
+		PS1="$short"
+	fi
+
+        [[ "$VENVS[$PWD]}" =~ ^y ]] && PS1="{PS1//\$/🐍}"
+
+	if _have tmux && [[ -n "$TMUX" ]]; then
+		tmux rename-window "$(wd)"
+	fi
 }
 
-export PS1="${GREEN}\u${RED}@${BLUE}\h ${YELLOW}in ${BLUE}\w \$(hermetic_git_status)\n${MAGENTA}\$ ${RESET}"
+wd() {
+	dir="${PWD##*/}"
+	parent="${PWD%"/${dir}"}"
+	parent="${parent##*/}"
+	echo "$parent/$dir"
+} && export wd
+
+found-venv() { test -e .venv/bin/activate; }
+venv-is-on() { [[ "$(which python)" =~ \.venv\/bin\/python$ ]]; }
+
+declare -A VENVS
+export VENVS
+
+llenv() {
+  found-venv || return
+  venv-is-on && return
+  test -n "${VENVS[$PWD]}" && return
+  read -rp "Want to activate the .venv? [Y/N]" answer
+  answer=${answer,,}
+  test -z "$answer" && answer=y
+  VENVS["$PWD"]="$answer"
+  if [[ $answer =~ ^y ]]; then
+    . .venv/bin/activate
+  fi 
+}
+
+PROMPT_COMMAND="llenv; __ps1"
 
 # aliases
 unalias -a

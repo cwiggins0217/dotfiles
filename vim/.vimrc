@@ -33,9 +33,10 @@ endif
 """"""""""
 " colors "
 """"""""""
-if has("termguicolors")
-  set termguicolors
-endif
+"" solarized doesn't work with this on
+"if has("termguicolors")
+"  set termguicolors
+"endif
 
 set t_Co=256
 
@@ -111,13 +112,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
   Plug 'conradirwin/vim-bracketed-paste'
+  Plug 'altercation/vim-colors-solarized'
   if has('nvim-0.8')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   endif
   if has ('nvim')
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-lua-ftplugin'
-    Plug 'craftzdog/solarized-osaka.nvim'
   endif
   call plug#end()
 
@@ -156,7 +157,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   syntax on
   set background=dark
-  colorscheme solarized-osaka
+  colorscheme solarized
 
   hi Normal ctermbg=NONE guibg=NONE
   hi LineNr ctermbg=NONE guibg=NONE
