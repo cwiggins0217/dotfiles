@@ -1,8 +1,4 @@
 #!/usr/bin/env sh
 
-while [ 1 ]
-  do 
-    weather=$(curl -Ss 'https://wttr.in/Lafayette?format=1')
-    echo "$weather"
-    sleep 60
-  done
+test -t 1 && exec curl -sSL wttr.in?0
+curl -sSL wttr.in?0

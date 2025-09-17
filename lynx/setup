@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# requires lynx to be installed and some custom configs
+
+mkdir ~/.config/ 2>/dev/null
+rm -rf ~/.config/lynx 2>/dev/null
+ln -s "$PWD" "$HOME/.config/lynx"
+ls -l ~/.config/lynx
