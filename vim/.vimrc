@@ -13,12 +13,16 @@ set number
 set relativenumber
 set ruler
 set showmode
-set tabstop=8
-set t_vb=""
-set softtabstop=8
+set tabstop=2
+set vb t_vb=""
+set softtabstop=2
 set shiftwidth=2
 set smartindent
 set smarttab
+set noignorecase
+set noerrorbells
+set visualbell
+
 
 """""""""""""""""""""""""""""""""""""""
 " misc stuff, makes vim less annoying "
@@ -26,10 +30,12 @@ set smarttab
 if v:version >=  800
   set nofixendofline
   set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
+  set listchars+=eol:↩
   set foldmethod=manual
   set nofoldenable
 endif
 
+match Visual '\s\+$'
 """"""""""
 " colors "
 """"""""""
@@ -42,7 +48,9 @@ set t_Co=256
 
 " more misc stuff "
 """""""""""""""""""
-set textwidth=80
+set textwidth=72
+set colorcolumn=73
+set spc=
 set expandtab
 set nobackup
 set noswapfile
@@ -53,12 +61,23 @@ set hlsearch
 set incsearch
 set linebreak
 set wrapscan
+set nowrap
+set shortmess=aoOtTI
+set viminfo='20,<1000,s1000 " prevent truncated yanks, deletes, etc
 set ttyfast
 set ttimeoutlen=0
 set showmatch
 filetype plugin indent on 
 set wildmenu
 set omnifunc=syntaxcomplete#Complete
+set noshowmatch
+set hidden
+set cinoptions+=:0
+set history=100
+
+if has("eval")
+  let g:loaded_matchparen=1
+endif
 
 " force loclist to always close when buffer does (affects vim-go, etc.)
 augroup CloseLoclistWindowGroup
@@ -98,7 +117,13 @@ fun! JumpToDef()
   endif
 endf
 
-set laststatus=2
+set laststatus=0
+
+nnoremap confe :e $HOME/.vimrc<CR>
+nnoremap confr :source $HOME/.vimrc<CR>
+nnoremap coming i_In development..._<Esc>
+
+set ruf=%30(%=#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 
 """"""""""""""""""""
 "     Vim-Plug      "
@@ -155,9 +180,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   "let g:go_gopls_analyses = { 'composites' : v:false }
   au FileType go nmap <leader>m ilog.Print("made")<CR><ESC>
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
-  syntax on
-  set background=dark
-  colorscheme solarized
+  if has("syntax")
+    syntax enable
+    set background=dark
+    colorscheme solarized
+  endif
 
   hi Normal ctermbg=NONE guibg=NONE
   hi LineNr ctermbg=NONE guibg=NONE
