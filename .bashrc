@@ -14,7 +14,7 @@ _source_if() { [[ -r "$1" ]] && source "$1"; }
 
 # better compatibility and portability
 # env vars
-export PATH=$PATH:/sbin/:/usr/sbin:~/go/bin/:~/.local/bin/:/opt/nvim-linux64/bin:/usr/local/go/bin:~/Scripts:~/.cache/rebar3/bin/:~/.cargo/bin/
+export PATH=$PATH:/sbin/:/usr/sbin:~/go/bin/:~/.local/bin/:/opt/nvim-linux64/bin:/usr/local/go/bin:~/Scripts:~/.cache/rebar3/bin/:~/.cargo/bin/:~/.rakubrew/bin/
 export XDG_RUNTIME_DIR=/run/user/`id -u` # for sway. there is probably a better way to do this.
 export EDITOR=vim
 export GITUSER="$USER"
@@ -230,3 +230,4 @@ PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 . "$HOME/.local/bin/env"
 . "$HOME/.cargo/env"
+eval "$(/home/cwiggins123/.rakubrew/bin/rakubrew init Bash)"

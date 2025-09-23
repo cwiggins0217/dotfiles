@@ -13,9 +13,6 @@ shopt -s extglob
 #get this       = var
 #get this thing = this_thing
 
-
-
-
 aln() {
   local char i max_len
   local -A lines_pre lines_post

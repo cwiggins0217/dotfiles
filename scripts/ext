@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-ext () {
+ext() {
   file=$1
   [ -z "$file" ] && echo 'ex <compressed>' && return 1
   [ ! -f "$file" ] && echo 'Invalid file: `'$file'`' && return 1

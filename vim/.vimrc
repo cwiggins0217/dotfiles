@@ -7,7 +7,7 @@ endif
 " some basic tweaks "
 """""""""""""""""""""
 set nocompatible
-set autoindent 
+set autoindent
 set autowrite
 set number
 set relativenumber
@@ -40,9 +40,9 @@ match Visual '\s\+$'
 " colors "
 """"""""""
 "" solarized doesn't work with this on
-"if has("termguicolors")
-"  set termguicolors
-"endif
+if has("termguicolors")
+  set termguicolors
+endif
 
 set t_Co=256
 
@@ -129,7 +129,6 @@ set ruf=%30(%=#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 "     Vim-Plug      "
 """""""""""""""""""""
 " only run if vim-plug is installed
-" 
 if filereadable(expand("~/.vim/autoload/plug.vim"))
 
   call plug#begin('~/.local/share/vim/plugins')
@@ -137,11 +136,16 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
   Plug 'conradirwin/vim-bracketed-paste'
-  Plug 'altercation/vim-colors-solarized'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'Raku/vim-raku'
+  Plug 'kaarmu/typst.vim'
+  Plug 'sainnhe/everforest'
   if has('nvim-0.8')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   endif
   if has ('nvim')
+    Plug 'rktjmp/lush.nvim'
+    Plug 'uloco/bluloco.nvim'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-lua-ftplugin'
   endif
@@ -182,8 +186,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   if has("syntax")
     syntax enable
-    set background=dark
-    colorscheme solarized
+    set background=light
+    let g:everforest_background = 'soft'
+    let g:everforest_better_performance = 1
+    colorscheme everforest
   endif
 
   hi Normal ctermbg=NONE guibg=NONE
