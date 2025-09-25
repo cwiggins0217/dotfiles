@@ -1,30 +1,21 @@
 #!/usr/bin/env bash
 
-: <<'EOM'
-This script setups weechat to work with Twitch using my personal preferences. Feel free to customize to your liking. You can always make changes and just rerun it once weechat is running so that the script can communicate with it. Perhaps the biggest thing to be aware of is that I prefer a very minimal chat window.
-EOM
+user=cwiggins
+channels=cwiggins
 
-tokenurl=https://antiscuff.com/oauth
+echo "generate oauth token here: https://antiscuff.com/oauth"
+read -rp "paste token: "
 
-[ ! -d "$HOME/.weechat" ] && mkdir -p ~/.weechat
-
+mkdir -p ~/.weechat
 fifo=~/.weechat/fifo
 log=~/.weechat/log
 
 if [[ ! -p "$fifo" ]]; then
-	echo "Is weechat running? Start first in another window."
-	exit 1
+  echo "error: weechat fifo not found at $fifo"
+  echo "enable it in weechat with /set fifo.file.path $fifo"
+  echo "you may need to enable it with /fifo enable"
+  exit 1
 fi
-
-read -rp "Twitch user name: " user
-read -rp "Channels separated by commas: (omit # and add , to last entry) " channels
-echo "Generate your OAuth token here: $tokenurl"
-echo "Revoke tokens if exposed: https://id.twitch.tv/oauth2/revoke"
-read -rp "Open in your web browser? [y|N]" resp
-[[ ${resp,,} == y ]] && open $tokenurl
-read -rp "Paste (starting with 'oauth:', empty keeps current): " token
-
-[[ $channels =~ $user ]] || channels+=$user
 
 cat <<EOF >"$fifo"
 */set logger.file.path "$log"

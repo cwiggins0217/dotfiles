@@ -67,7 +67,7 @@ set viminfo='20,<1000,s1000 " prevent truncated yanks, deletes, etc
 set ttyfast
 set ttimeoutlen=0
 set showmatch
-filetype plugin indent on 
+filetype plugin indent on
 set wildmenu
 set omnifunc=syntaxcomplete#Complete
 set noshowmatch
@@ -139,13 +139,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'jiangmiao/auto-pairs'
   Plug 'Raku/vim-raku'
   Plug 'kaarmu/typst.vim'
-  Plug 'sainnhe/everforest'
   if has('nvim-0.8')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   endif
   if has ('nvim')
-    Plug 'rktjmp/lush.nvim'
-    Plug 'uloco/bluloco.nvim'
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-lua-ftplugin'
   endif
@@ -154,10 +151,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:ale_sign_error = 'X'
   let g:ale_sign_warning = '!'
   let g:ale_linters = {'go': ['gometalinter', 'gofmt','gobuild']}
-
-  " pandoc
-  let g:pandoc#formatting#mode = 'h' " A'
-  let g:pandoc#formatting#textwidth = 72
 
   " golang
   let g:go_fmt_fail_silently = 0
@@ -175,7 +168,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:go_highlight_build_constraints = 1
   let g:go_highlight_diagnostic_errors = 1
   let g:go_highlight_diagnostic_warnings = 1
-  "let g:go_auto_type_info = 1 " forces 'Press ENTER' too much
   let g:go_auto_sameids = 0
   "    let g:go_metalinter_command='golangci-lint'
   "    let g:go_metalinter_command='golint'
@@ -186,10 +178,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
   if has("syntax")
     syntax enable
-    set background=light
-    let g:everforest_background = 'soft'
-    let g:everforest_better_performance = 1
-    colorscheme everforest
+    set background=dark
+    colorscheme elflord
   endif
 
   hi Normal ctermbg=NONE guibg=NONE
