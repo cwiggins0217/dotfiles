@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -z "$(command -v nvim)" ]; then
+	echo "wezterm not found"
+fi
+
+rm -rf   "$HOME/.config/wezterm/"
+mkdir -p "$HOME/.config/wezterm"
+ln -s    "$PWD/wezterm.lua" "$HOME/.config/wezterm/wezterm.lua"
