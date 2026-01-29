@@ -14,8 +14,8 @@ _source_if() { [[ -r "$1" ]] && source "$1"; }
 
 # better compatibility and portability
 # env vars
-export PATH=$PATH:/sbin/:/usr/sbin:~/go/bin/:~/.local/bin/:/opt/nvim-linux64/bin:/usr/local/go/bin:~/Scripts:~/.cache/rebar3/bin/:~/.cargo/bin/:~/.rakubrew/bin/
-export XDG_RUNTIME_DIR=/run/user/`id -u` # for sway. there is probably a better way to do this.
+export PLAN9=/home/cwiggins123/plan9port
+export PATH=$PATH:/sbin/:/usr/sbin:~/go/bin/:~/.local/bin/:/usr/local/go/bin:~/Scripts:~/.cargo/bin/:~/.rakubrew/bin/:$PLAN9/bin:~/.raku/bin
 export EDITOR=vim
 export GITUSER="$USER"
 export REPOS="$HOME/Repos"
@@ -75,7 +75,7 @@ if _have dircolors; then
     eval "$(dircolors -b "$HOME/.dir_colors")"
   else
     eval "$(dircolors -b)"
-  fi 
+  fi
 fi
 
 # shell options
@@ -110,9 +110,9 @@ PROMPT_AT=@
 
 __ps1() {
 	local P='$' dir="${PWD##*/}" B countme short long double \
-		r='\[\e[31m\]' h='\[\e[34m\]' \
-		u='\[\e[33m\]' p='\[\e[34m\]' w='\[\e[35m\]' \
-		b='\[\e[36m\]' x='\[\e[0m\]' \
+		r='\[\e[32m\]' h='\[\e[35m\]' \
+		u='\[\e[33m\]' p='\[\e[36m\]' w='\[\e[35m\]' \
+		b='\[\e[32m\]' x='\[\e[0m\]' \
 		g="\[\033[38;2;90;82;76m\]"
 
 	[[ $EUID == 0 ]] && P='#' && u=$r && p=$u # root
@@ -171,7 +171,7 @@ llenv() {
   fi 
 }
 
-PROMPT_COMMAND="llenv; __ps1"
+#PROMPT_COMMAND="llenv; __ps1"
 
 # aliases
 unalias -a
@@ -208,6 +208,7 @@ alias price='curl rate.sx/btc'
 alias evi='vi $HOME/.vimrc'
 alias ewez='vi $HOME/.wezterm.lua'
 alias ebash='vi $HOME/.bashrc'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/.git/ --work-tree=$HOME'
 
 _have doas && alias sudo=doas
 
@@ -217,7 +218,6 @@ _have podman && alias docker=podman
 _have weechat && alias irc='weechat'
 
 _have vim && alias vi=vim && EDITOR=vim
-_have nvim && alias vi=nvim && EDITOR=nvim
 _have gcal && alias cal=gcal
 
 #set -o vi
@@ -230,4 +230,7 @@ PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 . "$HOME/.local/bin/env"
 . "$HOME/.cargo/env"
-eval "$(/home/cwiggins123/.rakubrew/bin/rakubrew init Bash)"
+export PATH=/home/cwiggins123/.nimble/bin:$PATH
+
+eval "$(starship init bash)"
+export PATH="/home/cwiggins123/.pixi/bin:$PATH"

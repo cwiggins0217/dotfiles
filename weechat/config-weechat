@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-user=cwiggins
-channels=cwiggins
+user=TGG
+channels=TGG
 
 echo "generate oauth token here: https://antiscuff.com/oauth"
 read -rp "paste token: "
@@ -21,16 +21,16 @@ cat <<EOF >"$fifo"
 */set logger.file.path "$log"
 */set logger.file.flush_delay 1
 */set weechat.color.chat_bg default
-*/set weechat.color.chat_fg 223
-*/set weechat.color.chat_nick_self 214
+*/set weechat.color.chat_fg default
+*/set weechat.color.chat_nick_self 209
 */set weechat.color.chat_prefix_error 124
 */set weechat.color.chat_prefix_network 66
-*/set weechat.color.chat_prefix_action 214
+*/set weechat.color.chat_prefix_action 209
 */set weechat.color.chat_highlight 142
-*/set weechat.color.chat_read_marker 214
-*/set weechat.color.chat_host 243
-*/set weechat.color.chat_buffer 214
-*/set weechat.color.separator 243
+*/set weechat.color.chat_read_marker 209
+*/set weechat.color.chat_host 244
+*/set weechat.color.chat_buffer 209
+*/set weechat.color.separator 244
 */set weechat.look.prefix_join "👋"
 */set weechat.look.prefix_action "🌟"
 */set weechat.look.prefix_error "💢"
@@ -44,6 +44,7 @@ cat <<EOF >"$fifo"
 */set irc.server.twitch.tls off
 */set irc.server.twitch.autoconnect on
 */set irc.server.twitch.autojoin "#${channels//,/,#}"
+*/server add bitlbee localhost/6667 -autoconnect
 */filter add hide_quit irc.* irc_quit *
 */filter add hide_part irc.* irc_part *
 */save

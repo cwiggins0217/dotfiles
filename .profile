@@ -9,3 +9,6 @@ fi
 # opam configuration
 test -r /home/cwiggins/.opam/opam-init/init.sh && . /home/cwiggins/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 . "$HOME/.cargo/env"
+
+# Added by swiftly
+. "/home/cwiggins123/.local/share/swiftly/env.sh"

@@ -68,8 +68,8 @@ TERM xterm-termite
 EIGHTBIT 1
 NORMAL 00
 FILE 00
-DIR 34
-OTHER_WRITABLE 34;40
+DIR 36
+OTHER_WRITABLE 36;40
 LINK 35
 FIFO 30;44
 SOCK 35;44
@@ -272,7 +272,7 @@ EXEC 31  # Unix
 .ANSI-33-yellow 33
 .ANSI-01;33-bryellow 01;33
 .ANSI-34-blue 34
-.ANSI-01;34-brblue 01;34
+.ANSI-01;36-brblue 01;34
 .ANSI-35-magenta 35
 .ANSI-01;35-brmagenta 01;35
 .ANSI-36-cyan 36
@@ -298,10 +298,10 @@ EXEC 31  # Unix
 .swp 01;33
 .swo 01;33
 *,v 01;33
-.gpg 34
-.gpg 34
-.pgp 34
-.asc 34
-.3des 34
-.aes 34
-.enc 34
+.gpg 36
+.gpg 36
+.pgp 36
+.asc 36
+.3des 36
+.aes 36
+.enc 36

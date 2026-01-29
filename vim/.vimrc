@@ -40,7 +40,7 @@ match Visual '\s\+$'
 " colors "
 """"""""""
 "" solarized doesn't work with this on
-if has("termguicolors")
+if has('termguicolors')
   set termguicolors
 endif
 
@@ -48,8 +48,8 @@ set t_Co=256
 
 " more misc stuff "
 """""""""""""""""""
-set textwidth=72
-set colorcolumn=73
+set textwidth=100
+set colorcolumn=101
 set spc=
 set expandtab
 set nobackup
@@ -78,24 +78,6 @@ set history=100
 if has("eval")
   let g:loaded_matchparen=1
 endif
-
-" force loclist to always close when buffer does (affects vim-go, etc.)
-augroup CloseLoclistWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
-
-" format perl on save
-if has("eval") " vim-tiny detection
-fun! s:Perltidy()
-  let l:pos = getcurpos()
-  silent execute '%!perltidy -i=2'
-  call setpos('.', l:pos)
-endfun
-"autocmd FileType perl autocmd BufWritePre <buffer> call s:Perltidy()
-endif
-
-"autocmd BufWritePost config.def.h,config.h !sudo make install 
 
 " format shell on save
 if has("eval") " vim-tiny detection
@@ -132,67 +114,31 @@ set ruf=%30(%=#LineNr#%.50F\ [%{strlen(&ft)?&ft:'none'}]\ %l:%c\ %p%%%)
 if filereadable(expand("~/.vim/autoload/plug.vim"))
 
   call plug#begin('~/.local/share/vim/plugins')
-  Plug 'fatih/vim-go'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'dense-analysis/ale'
   Plug 'conradirwin/vim-bracketed-paste'
   Plug 'jiangmiao/auto-pairs'
-  Plug 'Raku/vim-raku'
   Plug 'kaarmu/typst.vim'
-  if has('nvim-0.8')
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  endif
-  if has ('nvim')
-    Plug 'xolox/vim-misc'
-    Plug 'xolox/vim-lua-ftplugin'
-  endif
+  Plug 'jnurmine/zenburn'
   call plug#end()
 
-  let g:ale_sign_error = 'X'
-  let g:ale_sign_warning = '!'
-  let g:ale_linters = {'go': ['gometalinter', 'gofmt','gobuild']}
-
-  " golang
-  let g:go_fmt_fail_silently = 0
-  let g:go_fmt_command = 'goimports'
-  let g:go_fmt_autosave = 1
-  let g:go_gopls_enabled = 1
-  let g:go_highlight_types = 1
-  let g:go_highlight_fields = 1
-  let g:go_highlight_functions = 1
-  let g:go_highlight_function_calls = 1
-  let g:go_highlight_operators = 1
-  let g:go_highlight_extra_types = 1
-  let g:go_highlight_variable_declarations = 1
-  let g:go_highlight_variable_assignments = 1
-  let g:go_highlight_build_constraints = 1
-  let g:go_highlight_diagnostic_errors = 1
-  let g:go_highlight_diagnostic_warnings = 1
-  let g:go_auto_sameids = 0
-  "    let g:go_metalinter_command='golangci-lint'
-  "    let g:go_metalinter_command='golint'
-  "    let g:go_metalinter_autosave=1
   set updatetime=100
-  "let g:go_gopls_analyses = { 'composites' : v:false }
-  au FileType go nmap <leader>m ilog.Print("made")<CR><ESC>
-  au FileType go nmap <leader>n iif err != nil {return err}<CR><ESC>
-  if has("syntax")
-    syntax enable
-    set background=dark
-    colorscheme elflord
-  endif
 
-  hi Normal ctermbg=NONE guibg=NONE
-  hi LineNr ctermbg=NONE guibg=NONE
-  hi clear SignColumn
-  hi Comment ctermbg=NONE guibg=NONE
-else
-  autocmd vimleavepre *.go !gofmt -w % " backup if fatih fails
+  fun! JumpToDef()
+    if exists("*GotoDefinition_" . &filetype)
+      call GotoDefinition_{&filetype}()
+    else
+      exe "norm! \<C-]>"
+    endif
+    endf
+
   if has("syntax")
     syntax on
+    set background=dark
+	colorscheme zenburn
     hi Normal ctermbg=NONE guibg=NONE
-    hi LineNr ctermbg=NONE guibg=NONE
     hi clear SignColumn
     hi Comment ctermbg=NONE guibg=NONE
+    hi LineNr cterm=NONE ctermbg=NONE ctermfg=6 gui=NONE guibg=NONE guifg=#606360
   endif
+else
+  colorscheme retrobox
 endif
