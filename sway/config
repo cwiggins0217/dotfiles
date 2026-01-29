@@ -1,5 +1,5 @@
 ### Autostart
-exec gentoo-pipewire-launcher restart 
+#exec gentoo-pipewire-launcher restart 
 
 ### Variables
 default_border none

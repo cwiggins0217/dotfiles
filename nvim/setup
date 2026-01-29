@@ -1,0 +1,10 @@
+#!/bin/sh
+
+
+if [ -z "$(command -v nvim)" ]; then
+	echo "neovim not found"
+fi
+
+rm -rf   "$HOME/.config/nvim/"
+mkdir -p "$HOME/.config/nvim/"
+ln -s 	 "$PWD/init.lua"       "$HOME/.config/nvim/init.lua"
